@@ -1,0 +1,18 @@
+# build output
+*.exe
+*.o
+*.obj
+build/
+bin/
+
+# SDL2 library
+sdl2/
+game.exe
+
+# vscode
+.vscode/ipch/
+.vscode/*.log
+
+# OS
+.DS_Store
+Thumbs.db
