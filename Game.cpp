@@ -4,6 +4,9 @@ using namespace std;
 
 void Game::run()
 {
+    lastMoveTime = SDL_GetTicks();
+    const int moveDelay = 10;
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         cout << "SDL Init Error: " << SDL_GetError() << endl;
@@ -15,6 +18,14 @@ void Game::run()
     isRunning = true;
     while (isRunning)
     {
+        Uint32 currentTime = SDL_GetTicks();
+
+        if (currentTime - lastMoveTime > moveDelay)
+        {
+            snake.update();
+            lastMoveTime = currentTime;
+        }
+        
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
@@ -27,7 +38,9 @@ void Game::run()
 
         SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 
-        SDL_Rect rect={100, 100, 20, 20};
+        auto head = snake.getHead();
+
+        SDL_Rect rect={head.first, head.second, 20, 20};
         SDL_RenderFillRect(renderer, &rect);
 
         SDL_RenderPresent(renderer);
