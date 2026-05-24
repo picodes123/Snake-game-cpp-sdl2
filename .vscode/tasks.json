@@ -2,13 +2,15 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "Build SDL2",
+            "label": "Build SDL2 Snake Game",
             "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
 
-                "${file}",
+                "main.cpp",
+                "Game.cpp",
+                "Snake.cpp",
 
                 "-IC:/Coding Stuffs/Snakegamecpp/sdl2/include",
                 "-LC:/Coding Stuffs/Snakegamecpp/sdl2/lib",
@@ -18,10 +20,11 @@
                 "-lSDL2",
 
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "C:/Coding Stuffs/Snakegamecpp/game.exe"
+                
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"
