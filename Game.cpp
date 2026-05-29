@@ -4,13 +4,14 @@
 #include <cstdlib>
 #include <random>
 #include <ctime>
+#include <string>
 
 using namespace std;
 
 void Game::run()
 {
     lastMoveTime = SDL_GetTicks();
-    const int moveDelay = 100;
+    const int moveDelay = 70;
     score = 0;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -58,9 +59,6 @@ void Game::run()
            }
            
         }
-
-        
-        
 
 
         

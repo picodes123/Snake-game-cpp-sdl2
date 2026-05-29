@@ -9,7 +9,7 @@ Snake::Snake()
     dirY = 0;
 }
 
-const int CELL_SIZE = 10;
+
 void Snake::update(){
 
     for (int i = body.size()-1; i > 0; i--){

@@ -23,4 +23,5 @@ private:
     std::vector<std::pair<int, int>> body;
     int dirX;
     int dirY;
+    const int CELL_SIZE = 10;
 };
