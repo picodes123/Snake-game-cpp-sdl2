@@ -5,6 +5,7 @@
 class Game
 {public:
     void run();
+    std::pair<int,int> food;
 
 private:
     Uint32 lastMoveTime; 

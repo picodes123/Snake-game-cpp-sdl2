@@ -1,11 +1,16 @@
 #include "Game.h"
 #include <iostream>
+#include "Snake.h"
+#include <cstdlib>
+#include <random>
+#include <ctime>
+
 using namespace std;
 
 void Game::run()
 {
     lastMoveTime = SDL_GetTicks();
-    const int moveDelay = 10;
+    const int moveDelay = 100;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -15,22 +20,52 @@ void Game::run()
     window = SDL_CreateWindow("Snake Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
+    srand(time(NULL));
+    int x = (rand()%80) * 10;
+    int y = (rand()%60) * 10;
+    food = {x,y};
+
+
     isRunning = true;
     while (isRunning)
     {
         Uint32 currentTime = SDL_GetTicks();
 
-        if (currentTime - lastMoveTime > moveDelay)
-        {
+        if (currentTime - lastMoveTime > moveDelay){
             snake.update();
             lastMoveTime = currentTime;
+
+            auto head = snake.getHead();
+
+            if (head.first == food.first && head.second == food.second){
+
+                snake.grow();
+                food = {(rand()%80)* 10, (rand()%60)* 10};
+
+            } }
+
+        if (snake.checkselfcollision())
+        {
+            isRunning = false;
         }
+        
+
+
         
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_QUIT)
                 isRunning = false;
+
+            if (event.type==SDL_KEYDOWN)
+            {
+                if(event.key.keysym.sym == SDLK_UP){snake.setDirection(0,-1);}
+                if(event.key.keysym.sym == SDLK_DOWN){snake.setDirection(0,1);}
+                if(event.key.keysym.sym == SDLK_LEFT){snake.setDirection(-1,0);}
+                if(event.key.keysym.sym == SDLK_RIGHT){snake.setDirection(1,0);}
+            }
+            
         }
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -38,10 +73,13 @@ void Game::run()
 
         SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 
-        auto head = snake.getHead();
+        snake.render(renderer);
 
-        SDL_Rect rect={head.first, head.second, 20, 20};
-        SDL_RenderFillRect(renderer, &rect);
+        
+        SDL_SetRenderDrawColor(renderer,255,0 ,0 ,255);
+
+        SDL_Rect foodRect = {food.first, food.second, 10, 10};
+        SDL_RenderFillRect(renderer, &foodRect);
 
         SDL_RenderPresent(renderer);
     }
@@ -49,4 +87,4 @@ void Game::run()
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
-}
+};
