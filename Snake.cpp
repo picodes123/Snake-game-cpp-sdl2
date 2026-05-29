@@ -29,7 +29,8 @@ void Snake::render(SDL_Renderer* renderer){
         SDL_RenderFillRect(renderer, &rect);
     } }
 
-void Snake::grow(){
+void Snake::grow(int amount){
+    for(int i =0; i < amount; i++)
     body.push_back(body.back());
 }
 

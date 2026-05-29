@@ -11,6 +11,7 @@ void Game::run()
 {
     lastMoveTime = SDL_GetTicks();
     const int moveDelay = 100;
+    score = 0;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -39,15 +40,26 @@ void Game::run()
 
             if (head.first == food.first && head.second == food.second){
 
-                snake.grow();
+                snake.grow(5);
                 food = {(rand()%80)* 10, (rand()%60)* 10};
+                score++;
 
-            } }
+            } 
 
-        if (snake.checkselfcollision())
-        {
+            if (snake.checkselfcollision()) { 
+
             isRunning = false;
+
+           }
+
+           if (head.first<0 || head.first>=800 || head.second<0 || head.second >=600)
+           {
+             isRunning = false;
+           }
+           
         }
+
+        
         
 
 

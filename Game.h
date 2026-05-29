@@ -6,6 +6,7 @@ class Game
 {public:
     void run();
     std::pair<int,int> food;
+    int score;
 
 private:
     Uint32 lastMoveTime; 

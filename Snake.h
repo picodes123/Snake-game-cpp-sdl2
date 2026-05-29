@@ -15,7 +15,7 @@ class Snake
 
     void render(SDL_Renderer* renderer);
 
-    void grow();
+    void grow(int amount);
 
     bool checkselfcollision();
 
