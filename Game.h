@@ -11,7 +11,6 @@ class Game
 private:
     Uint32 lastMoveTime; 
     Snake snake;
-    Snake update;
     SDL_Window* window;
     SDL_Renderer* renderer;
     bool isRunning;};
