@@ -10,7 +10,7 @@ A terminal-free snake game built in C++ using SDL2. Run it, eat food, don't hit 
 
 - Smooth movement with arrow key controls
 - Snake grows by 5 segments on each food eaten
-- Score tracking (score display soon it be added)
+- Score tracking (score display soon to be added)
 - Wall collision detection
 - Self collision detection
 - Randomly spawned food each round
